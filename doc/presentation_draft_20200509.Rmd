@@ -7,7 +7,7 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   ioslides_presentation:
     widescreen: true
-
+    logo: Rmd_sup/logo.png
 ---
 <style>
 /* Fonts and Spacing */
@@ -15,7 +15,7 @@ article p, article li, article li.build, section p, section li{
   font-family: 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
   text-align: justify;
   font-size:20px;
-  line-height: 1.5em;
+  line-height: 1.0em;
   color: Black;
 }
 h2 { /* Header 2 */
@@ -53,15 +53,23 @@ library("tidyverse")
 
 
 ## Introduction {data-background="Rmd_sup/breast.jpg" data-background-size=cover}
-### Dataset:
+### Data set:
+
 * breast cancer
 
 * proteomics by mass spectrometry
 
-### Goal:
-* Explore the dataset for patterns
+* four classes
+  
+```{r, out.width =  "40%", fig.align='left'}
+knitr::include_graphics("Rmd_sup/classes.png")
+```
 
-* Create models to identify the breast cancer subclasses
+
+### Goal:
+* Explore the data to identify patterns
+
+* Create models to predict breast cancer class
 
 
 <!-- ## Materials and Methods: {data-background=#ffffff} -->
@@ -74,8 +82,8 @@ library("tidyverse")
 
 
 ## Material and Methods {data-background=#ffffff}
-The data set
-```{r, out.width =  "750px"}
+
+```{r, out.width =  "750px", fig.align='center'}
 knitr::include_graphics("Rmd_sup/dataset.png")
 ```
 
@@ -88,21 +96,25 @@ knitr::include_graphics("Rmd_sup/clean_augment.png")
 
 ## Material and Methods {data-background=#ffffff}
 
-* Exploratory analysis
+<!-- * Exploratory analysis -->
 
-* PCA
+<!-- * PCA -->
 
-* K-means
+<!-- * K-means -->
 
-* ANN
+<!-- * ANN -->
 
-```{r,  out.width =  "800px"}
+```{r,  out.width =  "600px", fig.align = 'center'}
+knitr::include_graphics("Rmd_sup/models.png")
+```
+  
+  
+```{r,  out.width =  "600px", fig.align = 'center'}
 knitr::include_graphics("Rmd_sup/DS_steps.PNG")
 ```
 
 ## Material and Methods {data-background=#ffffff}
-
-```{r, out.width = "900px", fig.pos = "!H"}
+```{r, out.width = "950px",fig.align = 'center'}
 knitr::include_graphics("../doc/Rmd_sup/currentfiles.png")
 ```
 
@@ -137,7 +149,7 @@ knitr::include_graphics("../results/04_heatmap.png")
 ```
 
 ## Results --- dimentionality reduction {data-background=#ffffff}
-```{r, out.width =  "800px"}
+```{r, out.width =  "600px"}
 knitr::include_graphics("../results/05_PCA.png")
 ```
 
@@ -169,7 +181,7 @@ knitr::include_graphics("../results/06_ANN_performance.png")
 ## The end {data-background="Rmd_sup/final2.jpg" data-background-size=cover}
 
 ```{r, out.width="100px", fig.align="right"}
-knitr::include_graphics("../doc/Rmd_sup/logo.jpg")
+knitr::include_graphics("../doc/Rmd_sup/breast_cancer_logo.jpg")
 ```
 
 

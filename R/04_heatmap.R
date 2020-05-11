@@ -72,14 +72,14 @@ heatmap <- gene_set %>%
         axis.text.y = element_blank(),
         strip.text.y = element_text( face = "bold", 
                                     size = 18),
-        plot.title = element_text(size = 25,
+        plot.title = element_text(size = 21,
                                   hjust = 0.5,
                                   face = "bold"),
         legend.title = element_text(size = 18,
                                     hjust = 0.5),
         legend.text = element_text(size = 18),
         panel.spacing.y = unit(0.1, "cm")) +
-  labs(title = "Expression of common biomarkers in brest cancer",
+  labs(title = "Protein expression of common biomarkers in breast cancer",
        x = "Biomarkers",
        y = NULL) +
   

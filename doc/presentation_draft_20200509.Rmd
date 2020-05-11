@@ -81,7 +81,7 @@ library("tidyverse")
 
 ## Materials and Methods
 ### Dataset:
-```{r,  out.width =  "900px"}
+```{r,  out.width =  "800px"}
 knitr::include_graphics("Rmd_sup/datasets.PNG")
 ```
 

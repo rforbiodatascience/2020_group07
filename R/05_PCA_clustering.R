@@ -47,7 +47,7 @@ pca %>%
   theme_bw() +
   scale_y_continuous(labels = scales::percent) + myplot_aes
 
-ggsave(filename = "results/05_scree_plot.png", device = "png",
+ggsave(filename = "results/05_PCA_scree_plot.png", device = "png",
        height = 5)
 
 
@@ -88,7 +88,12 @@ ggsave(filename = "results/05_PCA.png",
 
 # K-means clustering ------------------------------------------------------
 
-k = 4 # 4 levels
+## Select number of clusters (as many as categories in Class variable)
+k <- proteome_pca_aug %>% 
+  select (Class) %>% 
+  unique() %>%
+  pull() %>% 
+  length()
 
 ## Clustering on original data
 set.seed(12)
@@ -181,7 +186,7 @@ plot2 <- proteome_pca_cluster_aug %>%
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 10),
         legend.key.size = unit(0.1,"cm")) +
-  guides(colour = guide_legend(title.position="top")) 
+  guides(colour = guide_legend (title.position = "top")) 
 
 
 
@@ -203,7 +208,7 @@ plot3 <- proteome_pca_cluster_aug %>%
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 10),
         legend.key.size = unit(0.1,"cm")) +
-  guides(colour = guide_legend(title.position="top")) 
+  guides(colour = guide_legend(title.position = "top")) 
 
 
 

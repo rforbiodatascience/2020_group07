@@ -112,13 +112,13 @@ knitr::include_graphics("../results/03_EDA_boxplot_combined.png")
 knitr::include_graphics("../results/03_EDA_class_distribution.png")
 ```
 
-## Breast cancer subtypes do not discriminate
+## Breast cancer subtypes do not discriminate on age
 
 ```{r,  out.width =  "770px"}
 knitr::include_graphics("../results/03_EDA_age_distribution.png")
 ```
 
-## Breast cancer  & Gender
+## Breast cancer and gender
 
 ```{r,  out.width =  "770px"}
 knitr::include_graphics("../results/03_EDA_gender_vs_tumortype.png")
@@ -143,20 +143,20 @@ knitr::include_graphics("../results/05_PCA.png")
 knitr::include_graphics("../results/05_PCA_kmeans.png")
 ```
 
-## ANN model's representation 
+## ANN model's structure 
 
 ```{r,out.width = "1000px"}
 knitr::include_graphics("../doc/Rmd_sup/ANN_structure.png")
 ```
 
-## ANN representation
+## ANN performance
 
 ```{r, out.width="700px", fig.align="center"}
 knitr::include_graphics("../results/06_ANN_performance.png")
 ```
 
 
-## Current "file" state
+## File structure and reproducibility
 
 
 ```{r, out.width="800px"}
@@ -170,11 +170,7 @@ knitr::include_graphics("../doc/Rmd_sup/currentfiles.PNG")
 
 * further work
 
-## End 2 {data-background="Rmd_sup/final2.jpg" data-background-size=cover}
-
-## End 3 {data-background="Rmd_sup/final3.jpg" data-background-size=cover}
-
-## End 1 {data-background="Rmd_sup/final_background.jpg" data-background-size=cover}
+## The end {data-background="Rmd_sup/final2.jpg" data-background-size=cover}
 
 ```{r, out.width="100px", fig.align="right"}
 knitr::include_graphics("../doc/Rmd_sup/logo.jpg")

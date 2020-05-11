@@ -96,11 +96,28 @@ ggsave(plot = plot_EDA2_boxplot_combo, filename = "results/03_EDA_boxplot_combin
 
 
 
+# Barplot: Class distribution across patients --------------------------------
+joined_data_aug %>% 
+  ggplot(mapping = aes(Class, fill = Class)) +
+  geom_bar(alpha = 0.8) +
+  theme_bw(base_family = "Times", 
+           base_size = 12) +
+  labs(y = "Count",
+       title = "Class distribution across patients") +
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  size = 18))
+
+ggsave(filename = "results/03_EDA_class_distribution.png",
+       device = "png",
+       height = 5)
+
+
 # Histogram: Age distribution in different cancer types ------------------------
 joined_data_aug %>% 
   ggplot(mapping = aes(x = Age_at_Initial_Pathologic_Diagnosis, 
                        fill = Class)) +
-  geom_histogram(binwidth = 10) +
+  geom_histogram(binwidth = 10,
+                 alpha = 0.8) +
   scale_x_continuous(breaks = seq(20, 100, 10)) + 
   labs(title = "Age distribution in different cancer types",
        x = 'Age',
@@ -119,7 +136,8 @@ ggsave(filename = "results/03_EDA_age_distribution.png",
 # Barplot: Gender distribution -----------------------------------------------
 joined_data_aug %>% 
   ggplot(mapping = aes(Gender)) +
-  geom_bar() +
+  geom_bar(fill = "darkblue",
+           alpha = 0.75) +
   theme_bw(base_family = "Times", 
            base_size = 15) +
   labs(y = "Count",
@@ -133,17 +151,3 @@ ggsave(filename = "results/03_EDA_gender_vs_tumortype.png",
 
 
 
-# Barplot: Class distribution across patients --------------------------------
-joined_data_aug %>% 
-  ggplot(mapping = aes(Class, fill = Class)) +
-  geom_bar() +
-  theme_bw(base_family = "Times", 
-           base_size = 12) +
-  labs(y = "Count",
-       title = "Class distribution across patients") +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                  size = 18))
-
-ggsave(filename = "results/03_EDA_class_distribution.png",
-       device = "png",
-       height = 5)

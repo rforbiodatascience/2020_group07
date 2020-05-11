@@ -8,10 +8,6 @@ output:
   ioslides_presentation:
     widescreen: true
 
-# revealjs::revealjs_presentation:
-#     theme: sky
-#     highlight: pygments
-#     center: true
 ---
 <style>
 /* Fonts and Spacing */
@@ -79,13 +75,13 @@ library("tidyverse")
 * Create models to identify the breast cancer subclasses
 
 
-## Materials and Methods
+## Materials and Methods: {data-background=#ffffff}
 ### Dataset:
 ```{r,  out.width =  "800px"}
 knitr::include_graphics("Rmd_sup/datasets.PNG")
 ```
 
-## Materials and Methods:
+## Materials and Methods: {data-background=#ffffff}
 
 * Exploratory analysis
 
@@ -99,71 +95,71 @@ knitr::include_graphics("Rmd_sup/datasets.PNG")
 knitr::include_graphics("Rmd_sup/DS_steps.PNG")
 ```
 
-## No definitive effects between expression landscapes and specific tumor subclasses
+## No definitive effects between expression landscapes and specific tumor subclasses {data-background=#ffffff}
 
 ```{r,  out.width =  "750px"}
 knitr::include_graphics("../results/03_EDA_boxplot_combined.png")
 ```
 
 
-## Breast cancer subtypes in the dataset are well represented
+## Breast cancer subtypes in the dataset are well represented {data-background=#ffffff}
 
 ```{r,  out.width =  "770px"}
 knitr::include_graphics("../results/03_EDA_class_distribution.png")
 ```
 
-## Breast cancer subtypes do not discriminate on age
+## Breast cancer subtypes do not discriminate on age {data-background=#ffffff}
 
 ```{r,  out.width =  "770px"}
 knitr::include_graphics("../results/03_EDA_age_distribution.png")
 ```
 
-## Breast cancer and gender
+## Breast cancer and gender {data-background=#ffffff}
 
 ```{r,  out.width =  "770px"}
 knitr::include_graphics("../results/03_EDA_gender_vs_tumortype.png")
 ```
 
-## Heatmap
+## Heatmap {data-background=#ffffff}
 
 ```{r, out.width =  "700px"}
 knitr::include_graphics("../results/04_heatmap.png")
 ```
 
-## Dimentionality reduction 
+## Dimentionality reduction {data-background=#ffffff}
 
 ```{r, out.width =  "800px"}
 knitr::include_graphics("../results/05_PCA.png")
 ```
 
 
-## K-means clustering 
+## K-means clustering {data-background=#ffffff}
 
 ```{r, out.width =  "800px"}
 knitr::include_graphics("../results/05_PCA_kmeans.png")
 ```
 
-## ANN model's structure 
+## ANN model's structure {data-background=#ffffff}
 
 ```{r,out.width = "1000px"}
 knitr::include_graphics("../doc/Rmd_sup/ANN_structure.png")
 ```
 
-## ANN performance
+## ANN performance {data-background=#ffffff}
 
 ```{r, out.width="700px", fig.align="center"}
 knitr::include_graphics("../results/06_ANN_performance.png")
 ```
 
 
-## File structure and reproducibility
+## File structure and reproducibility {data-background=#ffffff}
 
 
 ```{r, out.width="800px"}
 knitr::include_graphics("../doc/Rmd_sup/currentfiles.PNG")
 ```
 
-## Discussion
+## Discussion {data-background=#ffffff}
 
 
 * What could have been better

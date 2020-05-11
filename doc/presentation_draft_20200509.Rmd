@@ -8,6 +8,7 @@ output:
   ioslides_presentation:
     widescreen: true
     logo: Rmd_sup/logo.png
+
 ---
 <style>
 /* Fonts and Spacing */
@@ -27,6 +28,8 @@ body{ /* Normal */
 font-size: 8px;
 color: Black;
 }
+
+
 </style>
 
 h2.title {

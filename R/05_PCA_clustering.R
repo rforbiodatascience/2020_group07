@@ -48,7 +48,7 @@ pca %>%
   scale_y_continuous(labels = scales::percent) + myplot_aes
 
 ggsave(filename = "results/05_PCA_scree_plot.png", device = "png",
-       height = 5)
+       scale = 1.5)
 
 
 ## Augment and add y class
@@ -82,7 +82,7 @@ proteome_pca_aug %>%
 
 ggsave(filename = "results/05_PCA.png", 
        device = "png",
-       height = 5)
+       scale = 1.5)
 
 
 
@@ -157,6 +157,7 @@ plot1 <- proteome_pca_cluster_aug %>%
        x = 'PC1',
        y = 'PC2',
        colour = "True class") +
+  myplot_aes +
   theme(plot.title = element_text(hjust = 0.5),
         legend.position = "bottom",
         legend.title.align = 0.5,
@@ -165,7 +166,8 @@ plot1 <- proteome_pca_cluster_aug %>%
         legend.key.size = unit (0.1, "cm")) +
   guides(colour = guide_legend( title.position = "top",
                                 nrow = 2,
-                                byrow = TRUE))
+                                byrow = TRUE)) +
+  myplot_aes
 
 
 ## Clusters on original data
@@ -174,11 +176,12 @@ plot2 <- proteome_pca_cluster_aug %>%
              y = .fittedPC2,
              colour = cluster_original)) +
   geom_point(size=3) +
-  labs(title = "Clusters on original data",
+  labs(title = "Clustering: original data",
        subtitle = paste0("accuracy = ", round(accuracy[[1]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
        colour = "clusters") +
+  myplot_aes +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5, size = 10), 
         legend.position = "bottom",
@@ -196,11 +199,12 @@ plot3 <- proteome_pca_cluster_aug %>%
              y = .fittedPC2, 
              colour = cluster_pca)) +
   geom_point(size=3) +
-  labs(title = "Clusters on PCA data",
+  labs(title = "Clustering: PCA data",
        subtitle = paste0("accuracy = ", round(accuracy[[2]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
        colour = "clusters") +
+  myplot_aes +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5, size = 10), 
         legend.position = "bottom",
@@ -209,6 +213,7 @@ plot3 <- proteome_pca_cluster_aug %>%
         legend.text = element_text(size = 10),
         legend.key.size = unit(0.1,"cm")) +
   guides(colour = guide_legend(title.position = "top")) 
+
 
 
 

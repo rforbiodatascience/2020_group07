@@ -18,7 +18,6 @@ joined_data_aug <- read_csv(file = "data/02_joined_data_PAM50_aug.csv")
 # Prepare data ------------------------------------------------------------
 
 ## Partition data with data_type column: training (~70%) and test (~30%)
-set.seed(100)
 joined_data_prep <- joined_data_aug  %>% 
   # Remove control samples (too few samples in this group)
   filter(Class %in% c("Basal", "HER2", "LumA", "LumB")) %>% 
@@ -55,7 +54,6 @@ y_test <- joined_data_prep %>%
   filter(data_type <= 3 ) %>%
   pull(Class_num) %>% 
   to_categorical
-
 
 
 # Define ANN model --------------------------------------------------------
@@ -110,7 +108,7 @@ history <- model %>%
 
 # Evaluate model ----------------------------------------------------------
 
-## All classes need to be predicted for the factoring to work
+## OBS: All classes need to be predicted for the factoring to work
 perf_test <- model %>%
   evaluate(X_test, y_test)
 
@@ -143,33 +141,23 @@ results <- bind_rows(
            factor,
          Correct = ifelse(y_true == y_pred ,"yes", "no") %>%
            factor,
-         data_type = 'train'))
+         data_type = 'train')) %>%
+  # Factor the columns to get training data before test in plot
+  mutate(data_type = factor(data_type, 
+                          levels = c('train', 'test')))
 
 my_counts <- results %>% 
-  count(y_pred, y_true, data_type)
+  count(y_pred, y_true, data_type) %>%
+  # Factor the columns to get training data before test in plot
+  mutate(data_type = factor(data_type,
+                            levels = c('train', 'test')))
 
 
 
 # Visualise model performance ---------------------------------------------
-
 title <- paste0('Confusion matrix of Neural Network for cancer class prediction')
 sub_title <- paste0("Training Accuracy = ", acc_train, "%, n = ", nrow(X_train), ". ",
                    "Test Accuracy = ", acc_test, "%, n = ", nrow(X_test), ".")
-
-## Factor the columns to get training data before test in plot
-results$data_type <- factor(results$data_type, levels = c('train','test'))
-my_counts$data_type <- factor(my_counts$data_type, levels = c('train','test'))
-
-
-
-# results <- results %>% 
-#   mutate (data_type = factor(., 
-#                              levels = c('train', 'test')))
-# 
-# my_counts <- my_counts %>% 
-#   mutate (data_type = factor(., 
-#                              levels = c('train', 'test')))
-
 
 ## Plot results
 results %>%

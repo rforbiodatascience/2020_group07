@@ -6,6 +6,7 @@ rm(list = ls())
 library("tidyverse")
 library("broom")
 library("gridExtra")
+library("grid")
 
 
 # Define functions --------------------------------------------------------
@@ -36,9 +37,12 @@ control_range <- joined_data_full_aug %>%
             max = max(upper)) %>%
   unlist()
 
-# Remove controls, since there are too few samples in this group
+
 joined_data_aug <- joined_data_aug %>%
-  filter(Class != "Control") 
+  # Remove controls, since there are too few samples in this group
+  filter(Class != "Control")  %>% 
+  # Change Gender values to lowercase
+  mutate(Gender = str_to_lower(Gender))
 
 
 
@@ -76,11 +80,15 @@ p4_boxplot <- p4_boxplot + theme(legend.position = "none")
 
 
 # Combine the 4 plots and the shared legend
+superior_title <- "Protein expression distribution across classes"
+
 plot_EDA2_boxplot_combo <- grid.arrange(p1_boxplot,
                                         p2_boxplot, 
                                         p3_boxplot, 
                                         p4_boxplot,
                                         shared_legend,
+                                        top = textGrob(superior_title,
+                                                       gp = gpar(fontsize = 25)),
                                         ncol= 2,
                                         widths = c(2.7, 2.7),
                                         nrow = 3,
@@ -92,45 +100,52 @@ plot_EDA2_boxplot_combo <- grid.arrange(p1_boxplot,
 
 ggsave(plot = plot_EDA2_boxplot_combo, filename = "results/03_EDA_boxplot_combined.png",
        device = "png",
-       scale = 1.8)
+       scale = 1.8,
+       dpi = 300)
 
 
 
-# Barplot: Class distribution across patients --------------------------------
+# Barplot: Class distribution-----------------------------------------------
 joined_data_aug %>% 
   ggplot(mapping = aes(Class, fill = Class)) +
   geom_bar(alpha = 0.8) +
   theme_bw(base_family = "Times", 
-           base_size = 12) +
-  labs(y = "Count",
-       title = "Class distribution across patients") +
+           base_size = 15) +
+  labs(y = "Number of patients",
+       title = "Breast cancer class distribution") +
   theme(plot.title = element_text(hjust = 0.5, 
                                   size = 18),
         legend.position = "none")
 
 ggsave(filename = "results/03_EDA_class_distribution.png",
        device = "png",
-       scale = 1)
+       scale = 1,
+       dpi = 300)
 
 
-# Histogram: Age distribution in different cancer types ------------------------
+# Histogram: Age distribution ---------------------------------------------
 joined_data_aug %>% 
   ggplot(mapping = aes(x = Age_at_Initial_Pathologic_Diagnosis, 
                        fill = Class)) +
   geom_histogram(binwidth = 10,
                  alpha = 0.8) +
   scale_x_continuous(breaks = seq(20, 100, 10)) + 
-  labs(title = "Age distribution in different cancer types",
+  labs(title = "Age distribution",
+       subtitle = "across breast cancer classes",
        x = 'Age',
-       y = 'Count') +
+       y = 'Number of patients') +
   theme_bw(base_family = "Times", 
            base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5, 
-                                size = 18)) 
+                                size = 18),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     size = 12)) 
 
 ggsave(filename = "results/03_EDA_age_distribution.png", 
        device = "png",
-       scale = 1)
+       scale = 1,
+       width = 6,
+       dpi = 300)
 
 
 
@@ -141,14 +156,15 @@ joined_data_aug %>%
            alpha = 0.75) +
   theme_bw(base_family = "Times", 
            base_size = 15) +
-  labs(y = "Count",
+  labs(y = "Number of patients",
        title = "Gender distribution") +
   theme(plot.title = element_text(hjust = 0.5, 
                                   size = 18))
 
 ggsave(filename = "results/03_EDA_gender_vs_tumortype.png", 
        device = "png",
-       scale = 1)   
+       scale = 1,
+       dpi = 300)   
 
 
 

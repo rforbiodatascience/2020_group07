@@ -38,23 +38,26 @@ plotting_boxplot <- function(data, subset_term, color,
     ggplot(aes(y = reorder(patient_ID, value,FUN = median), 
                x = value)) + 
     annotate("rect", 
-             xmin= control_range[1], xmax=control_range[2], # supply from data
-             ymin=-Inf, ymax=Inf,
-             alpha=0.3, fill= control_range_colour) +
-    geom_boxplot(alpha=0.7,
+             xmin = control_range[1], 
+             xmax = control_range[2], # supply from data
+             ymin = -Inf,
+             ymax = Inf,
+             alpha = 0.3, 
+             fill = control_range_colour) +
+    geom_boxplot(alpha = 0.7,
                  varwidth = TRUE,
                  outlier.shape = NA,
                  fill = color) + 
     labs(x = "Log2 Expression levels",
          y = "Patients",
          title = subset_term) +
-    xlim(-10,10) +
-    geom_vline(aes(xintercept=control_range[2],
-                   color="Control samples"), 
-               linetype="solid",
-               size=1) +
-    geom_vline(aes(xintercept=control_range[1]), 
-               linetype="solid",
+    xlim(-10, 10) +
+    geom_vline(aes(xintercept = control_range[2],
+                   color = "Control samples"), 
+               linetype = "solid",
+               size = 1) +
+    geom_vline(aes(xintercept = control_range[1]), 
+               linetype = "solid",
                size=1) +
     scale_color_manual(name = "Inter Quartile Range:", 
                        values = c('Control samples' = "black", 
@@ -67,9 +70,12 @@ plotting_boxplot <- function(data, subset_term, color,
     theme_bw(base_family = "Times", 
              base_size = 20) +
     theme(legend.position = "bottom",
+          legend.title = element_text(size = 15),
+          axis.text.x = element_text(size = 18),
+          axis.text.y.left = element_text(size = 18),
           axis.text.y = element_blank(),
           plot.title = element_text(hjust = 0.5,
-                                    size = 20))
+                                    size = 22))
 
   return(plot)
 }

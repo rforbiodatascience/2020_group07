@@ -109,7 +109,7 @@ knitr::include_graphics("Rmd_sup/models.png")
 ```
   
   
-```{r,  out.width =  "600px", fig.align = 'center'}
+```{r,  out.width =  "400px", fig.align = 'center'}
 knitr::include_graphics("Rmd_sup/DS_steps.PNG")
 ```
 
@@ -128,17 +128,17 @@ knitr::include_graphics("../results/03_EDA_boxplot_combined.png")
 
 ## Results --- breast cancer subtypes in the dataset are well represented  {data-background=#ffffff}
 
-```{r,  out.width =  "770px"}
+```{r,  out.width =  "700px"}
 knitr::include_graphics("../results/03_EDA_class_distribution.png")
 ```
 
 ## Results --- breast cancer subtypes do not discriminate on age {data-background=#ffffff}
-```{r,  out.width =  "770px"}
+```{r,  out.width =  "700px"}
 knitr::include_graphics("../results/03_EDA_age_distribution.png")
 ```
 
 ## Results --- breast cancer and gender {data-background=#ffffff}
-```{r,  out.width =  "770px"}
+```{r,  out.width =  "700px"}
 knitr::include_graphics("../results/03_EDA_gender_vs_tumortype.png")
 ```
 

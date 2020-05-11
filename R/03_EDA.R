@@ -92,7 +92,7 @@ plot_EDA2_boxplot_combo <- grid.arrange(p1_boxplot,
 
 ggsave(plot = plot_EDA2_boxplot_combo, filename = "results/03_EDA_boxplot_combined.png",
        device = "png",
-       height = 5)
+       scale = 1.8)
 
 
 
@@ -105,11 +105,12 @@ joined_data_aug %>%
   labs(y = "Count",
        title = "Class distribution across patients") +
   theme(plot.title = element_text(hjust = 0.5, 
-                                  size = 18))
+                                  size = 18),
+        legend.position = "none")
 
 ggsave(filename = "results/03_EDA_class_distribution.png",
        device = "png",
-       height = 5)
+       scale = 1)
 
 
 # Histogram: Age distribution in different cancer types ------------------------
@@ -129,7 +130,7 @@ joined_data_aug %>%
 
 ggsave(filename = "results/03_EDA_age_distribution.png", 
        device = "png",
-       height = 5)
+       scale = 1)
 
 
 
@@ -147,7 +148,7 @@ joined_data_aug %>%
 
 ggsave(filename = "results/03_EDA_gender_vs_tumortype.png", 
        device = "png",
-       height = 5)   
+       scale = 1)   
 
 
 

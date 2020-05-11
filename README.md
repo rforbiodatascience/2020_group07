@@ -1,7 +1,7 @@
 2020\_group07: Breast cancer analysis
 ====================
 
-![](./doc/Rmd_sup/gitBanner.PNG){ width=1200px }
+![](./doc/Rmd_sup/gitBanner.PNG)
 
 Description
 --------------------

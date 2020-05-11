@@ -1,20 +1,20 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+
+# Load libraries ----------------------------------------------------------
 library("tidyverse")
 
-# Load data
-# ------------------------------------------------------------------------------
+
+# Load data ---------------------------------------------------------------
 clinical_data_clean <- read_csv(file = "data/01_clinical_data_clean.csv")
 proteome_data_clean <- read_csv(file = "data/01_proteome_data_clean.csv")
 PAM50_clean <- read_csv(file = "data/01_PAM50_clean.csv")
 
-# Wrangle data
-# ------------------------------------------------------------------------------
-# Rename Class groups in clinical data
+
+# Wrangle data ------------------------------------------------------------
+
+## Modify "Class" variable in Clinical data
 clinical_data_aug <- clinical_data_clean %>% 
   rename(Class = PAM50_mRNA ) %>% 
   mutate(Class = str_replace(Class,
@@ -34,7 +34,7 @@ clinical_data_aug <- clinical_data_clean %>%
                         levels = c("Basal", "HER2", "LumA", "LumB", "Control")))
 
 
-## Handle NA values in proteome data
+## Handle NA values in Proteome data
 proteome_data_aug <- proteome_data_clean %>% 
   # Remove genes with too many NAs (over 50%)
   discard(~sum(is.na(.x))/length(.x) >= 0.5) %>% 
@@ -42,7 +42,7 @@ proteome_data_aug <- proteome_data_clean %>%
   mutate_all(~ifelse(is.na(.), median(., na.rm = TRUE), .)) 
 
 
-## Create a PAM50genes-filtered version of the proteome data
+## Create a PAM50genes-filtered version of the Proteome data
 PAM50genes <- PAM50_clean %>% 
   select(RefSeq_accession_number) %>% 
   pull()
@@ -52,29 +52,36 @@ proteome_data_PAM50_aug <- proteome_data_aug %>%
   mutate(patient_ID = proteome_data_aug$patient_ID)
 
 
-
-## Join clinical and proteome data (full version)
+# Join Clinical and Proteome data (full version)
 joined_data_full_aug <- proteome_data_aug %>%
   right_join(clinical_data_aug, 
              ., 
              by = "patient_ID") %>% 
   # Add control labels
   mutate(Class = replace_na(Class, 
-                            replace = "Control"))
+                            replace = "Control")) %>%
+  # Factorize Class variable
+  mutate(Class = factor(Class, 
+                        levels = c("Basal", "HER2", "LumA", "LumB", "Control")))
 
 
-## Join clinical and proteome data (PAM50genes filtered version)
+# Join Clinical and Proteome data (PAM50genes filtered version)
 joined_data_PAM50_aug <- proteome_data_PAM50_aug %>%
   right_join(clinical_data_aug, 
              ., 
              by = "patient_ID")  %>% 
   # Add control labels
-  mutate(Class = replace_na(Class, "Control")) %>% 
-  mutate(Class = factor(Class, levels = c("Basal", "HER2", "LumA", "LumB", "Control")))
+  mutate(Class = replace_na(Class, 
+                            replace = "Control")) %>% 
+  # Factorize Class variable
+  mutate(Class = factor(Class, 
+                        levels = c("Basal", "HER2", "LumA", "LumB", "Control")))
 
 
-# Write data
-# ------------------------------------------------------------------------------
+
+
+# Write data --------------------------------------------------------------
+
 ## Full version
 write_csv(x = joined_data_full_aug,
           path = "data/02_joined_data_full_aug.csv")

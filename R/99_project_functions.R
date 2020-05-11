@@ -1,23 +1,21 @@
 # DEFINE PROJECT FUNCTIONS
-# ------------------------------------------------------------------------------
 
 
-# Tibble to matrix
-# ------------------------------------------------------------------------------
-# Credit: https://rdrr.io/github/HuntsmanCancerInstitute/hciR/man/as_matrix.html
+# Tibble to matrix --------------------------------------------------------
+
 as_matrix <- function(x){
   if(!tibble::is_tibble(x) ) stop("x must be a tibble")
   y <- as.matrix.data.frame(x[,-1])
   rownames(y) <- x[[1]]
   y
 }
+## Credit: 
+## https://rdrr.io/github/HuntsmanCancerInstitute/hciR/man/as_matrix.html
 
 
-# Extract the plot's legend
-# ------------------------------------------------------------------------------
+# Extract plot's legend -----------------------------------------------
+
 get_legend <- function(myggplot){
-  #' Returns the "legend" object from a plot object:
-  #' 
   #' @param myggplot a ggplot object
   tmp <- ggplot_gtable(ggplot_build(myggplot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
@@ -26,8 +24,8 @@ get_legend <- function(myggplot){
 }
 
 
-# Customized boxplot
-# ------------------------------------------------------------------------------
+# Customized boxplot ------------------------------------------------------
+
 plotting_boxplot <- function(data, subset_term, color, 
                              control_range = control_range, 
                              control_range_colour = "yellow1") {
@@ -77,8 +75,9 @@ plotting_boxplot <- function(data, subset_term, color,
 
 
 
-# Set up the plot's theme to be consistent across all plots
-# ------------------------------------------------------------------------------
+# Customized plot's theme -------------------------------------------------
+
+## to be consistent across all plots
 myplot_aes <- theme_bw(base_family = "Times", 
                          base_size = 18) +
               theme(plot.title = element_text(hjust = 0.5, 

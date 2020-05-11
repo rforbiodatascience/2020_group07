@@ -1,5 +1,5 @@
-# Install packages
-# ------------------------------------------------------------------------------
+# Install packages --------------------------------------------------------
+
 if (!requireNamespace("tidyverse", quietly = TRUE))
   install.packages("tidyverse") 
 if (!requireNamespace("broom", quietly = TRUE))
@@ -10,8 +10,6 @@ if (!requireNamespace("patchwork", quietly = TRUE))
   install.packages("patchwork") 
 if (!requireNamespace("plotly", quietly = TRUE))
   install.packages("plotly")
-if (!requireNamespace("RColorBrewer", quietly = TRUE))
-  install.packages("RColorBrewer")
 if (!requireNamespace("keras", quietly = TRUE))
   install.packages("keras") 
 if (!requireNamespace("miniconda", quietly = TRUE))
@@ -19,8 +17,9 @@ if (!requireNamespace("miniconda", quietly = TRUE))
 if (!requireNamespace("tensorflow", quietly = TRUE))
   install.packages("tensorflow") 
 
-# Run all scripts
-# ------------------------------------------------------------------------------
+
+# Run all scripts ---------------------------------------------------------
+
 source(file = "R/01_load_and_clean.R.R")
 source(file = "R/02_augment.R")
 source(file = "R/03_EDA.R")

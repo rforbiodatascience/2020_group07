@@ -1,36 +1,35 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+
+# Load libraries ----------------------------------------------------------
 library(tidyverse)
 library(broom)
 library(patchwork)
-library(RColorBrewer)
 
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
-# Load data
-# ------------------------------------------------------------------------------
+
+# Load data ---------------------------------------------------------------
 joined_data_aug <- read_csv(file = "data/02_joined_data_PAM50_aug.csv")
 
-# Wrangle data
-# ------------------------------------------------------------------------------
-# Remove healthy control samples
+
+# Wrangle data ------------------------------------------------------------
+
+## Remove healthy control samples
 joined_data_aug <- joined_data_aug %>% 
   filter(Class != "Control")
 
+## Select only proteome-count columns
 proteome_data <- joined_data_aug %>%
-  # select only proteome-count columns
   select(starts_with("NP"))            
 
 
-# PCA 
-# ---------------------------------------------------------------------------
+
+# PCA ---------------------------------------------------------------------
+
 ## Compute PCA
 pca <- proteome_data %>% 
   prcomp(center = TRUE, scale = TRUE) 
@@ -57,7 +56,8 @@ proteome_pca_aug <- pca %>%
   augment(proteome_data) %>%
   mutate(Class = factor(joined_data_aug$Class, levels = c("Basal", "HER2", "LumA", "LumB")))
 
-## Get PC percent
+
+## Get PC percents
 PC1_perc <- pca %>% 
   tidy("pcs") %>% 
   filter(PC==1) %>% 
@@ -67,6 +67,7 @@ PC2_perc <- pca %>%
   tidy("pcs") %>% 
   filter(PC==2) %>% 
   pull(percent) 
+
 
 ## Scatter proteome data - PC1/PC2
 proteome_pca_aug %>% 
@@ -85,37 +86,35 @@ ggsave(filename = "results/05_PCA.png",
 
 
 
-# K-means clustering
-# ------------------------------------------------------------------------------
+# K-means clustering ------------------------------------------------------
+
 k = 4 # 4 levels
 
-### Clustering on original data
+## Clustering on original data
 set.seed(12)
 cluster_original <- proteome_data %>%
   kmeans(centers = k)
 
-### Augment to PCA data
+## Augment to PCA data
 proteome_pca_cluster_aug <- 
   cluster_original %>%
   broom::augment (proteome_pca_aug) %>% 
   rename(cluster_original = .cluster)
 
 
-### Clustering on dimensionality-reduced data (2 first PCs)
+## Clustering on dimensionality-reduced data (2 first PCs)
 cluster_pca <- proteome_pca_aug %>%
   select(.fittedPC1, .fittedPC2) %>%
   kmeans(centers = k)
 
-### Augment to PCA/kmeans data
+## Augment to PCA/kmeans data
 proteome_pca_cluster_aug <- 
   cluster_pca %>% 
   broom::augment (proteome_pca_cluster_aug) %>% 
   rename(cluster_pca = .cluster)
 
 
-# Which clustering technique performs better
-# ------------------------------------------------------------------------------
-
+## Which clustering technique performs better
 accuracy <- proteome_pca_cluster_aug %>%
   
   select(Class, cluster_original, cluster_pca) %>%
@@ -139,9 +138,11 @@ accuracy <- proteome_pca_cluster_aug %>%
 
 
 
-# Visualization of clusters on PCs
-# ------------------------------------------------------------------------------
-### Original classes
+
+
+# Visualization of clusters on PCs ----------------------------------------
+
+## Original classes
 plot1 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2, 
@@ -162,9 +163,7 @@ plot1 <- proteome_pca_cluster_aug %>%
                                 byrow = TRUE))
 
 
-
-
-### Clusters on original data
+## Clusters on original data
 plot2 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2,
@@ -186,7 +185,7 @@ plot2 <- proteome_pca_cluster_aug %>%
 
 
 
-### Clusters on dimensionality-reduced data (first 2 PCs)
+## Clusters on dimensionality-reduced data (first 2 PCs)
 plot3 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2, 
@@ -205,6 +204,8 @@ plot3 <- proteome_pca_cluster_aug %>%
         legend.text = element_text(size = 10),
         legend.key.size = unit(0.1,"cm")) +
   guides(colour = guide_legend(title.position="top")) 
+
+
 
 (plot1 + plot2 + plot3) 
 

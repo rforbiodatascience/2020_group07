@@ -1,30 +1,34 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+
+# Load libraries ----------------------------------------------------------
 library(tidyverse)
 library(ggplot2)
 library(plotly)
 
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 
-# Load data
-# ------------------------------------------------------------------------------
+# Load data ---------------------------------------------------------------
 data <- read_csv(file = "data/02_joined_data_full_aug.csv")
 
-# Wrangle data
-# ------------------------------------------------------------------------------
-### Create long data for heatmap
+
+# Wrangle data -----------------------------------------------------------
+
 gene_set <- data %>% 
   # Keep only relevant columns for heatmap
-  select(patient_ID, Class, NP_000537, NP_006209, NP_001002295, NP_000116, NP_000917, NP_004439) %>% 
-  # Give gene names to RefSeq numbers
+  select(patient_ID, 
+         Class, 
+         NP_000537, 
+         NP_006209, 
+         NP_001002295, 
+         NP_000116, 
+         NP_000917, 
+         NP_004439) %>% 
+  # Change protein RefIDs to correspondent gene names
   rename("TP53" = "NP_000537",
          "PIK3CA" = "NP_006209",
          "GATA3" = "NP_001002295",
@@ -35,12 +39,15 @@ gene_set <- data %>%
   pivot_longer(cols = c("TP53", "PIK3CA", "GATA3", "ESR1", "PGR", "ERBB2"), 
                names_to = "RefSeq",
                values_to = "ITRAQ_log2_ratio") %>% 
-  # Set factors and levels fot the plot
-  mutate(Class = factor(Class, levels = c("Basal", "HER2", "LumA", "LumB", "Control"))) %>% 
-  mutate(RefSeq = factor(RefSeq, levels = c("TP53", "PIK3CA", "GATA3", "ESR1", "PGR", "ERBB2")))
+  # Set factors and levels for the plot
+  mutate(Class = factor(Class, 
+                        levels = c("Basal", "HER2", "LumA", "LumB", "Control"))) %>% 
+  mutate(RefSeq = factor(RefSeq, 
+                         levels = c("TP53", "PIK3CA", "GATA3", "ESR1", "PGR", "ERBB2")))
 
-# Create heatmap
-# ------------------------------------------------------------------------------
+
+
+# Create heatmap ----------------------------------------------------------
 heatmap <- gene_set %>% 
   ggplot(mapping = aes(RefSeq, patient_ID, fill = ITRAQ_log2_ratio)) +
   geom_tile() +

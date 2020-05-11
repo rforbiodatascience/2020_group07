@@ -1,27 +1,30 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+
+# Load libraries ----------------------------------------------------------
 library("tidyverse")
 library("broom")
 library("gridExtra")
 
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions --------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 
-# Load data
-# ------------------------------------------------------------------------------
+# Load data ---------------------------------------------------------------
+
+# PAM50genes filtered version
 joined_data_aug <- read_csv(file = "data/02_joined_data_PAM50_aug.csv")
+
+# Full version
 joined_data_full_aug <-  read_csv(file = "data/02_joined_data_full_aug.csv")
 
-# Wrangle data
-# ------------------------------------------------------------------------------
-# Get the Control sample range
+
+
+# Wrangle data ------------------------------------------------------------
+
+# Get the Control sample range (for the boxplot)
 control_range <- joined_data_full_aug %>%
   filter(Class != "Control") %>%
   select(patient_ID, starts_with("NP_")) %>%
@@ -38,64 +41,12 @@ joined_data_aug <- joined_data_aug %>%
   filter(Class != "Control") 
 
 
-# Plot: Age distribution in different cancer types
-# ------------------------------------------------------------------------------
-joined_data_aug %>% 
-  ggplot(mapping = aes(x = Age_at_Initial_Pathologic_Diagnosis, 
-                       fill = Class)) +
-  geom_histogram(binwidth = 10) +
-  scale_x_continuous(breaks = seq(20, 100, 10)) + 
-  labs(title = "Age distribution in different cancer types",
-       x = 'Age',
-       y = 'Count') +
-  #scale_fill_manual(values = custom_colors, ) +
-  theme_bw(base_family = "Times", 
-           base_size = 15) +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                size = 18)) 
-
-ggsave(filename = "results/03_EDA_age_distribution.png", 
-       device = "png",
-       height = 5)
 
 
-# Plot: Gender distribution 
-# ------------------------------------------------------------------------------
-joined_data_aug %>% 
-  ggplot(mapping = aes(Gender)) +
-  geom_bar() +
-  theme_bw(base_family = "Times", 
-           base_size = 15) +
-  labs(y = "Count",
-       title = "Gender distribution") +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                  size = 18))
+# Boxplot: protein expression in different cancer types -------------------
+## 4 boxplots combined into one canvas
 
-ggsave(filename = "results/03_EDA_gender_vs_tumortype.png", 
-       device = "png",
-       height = 5)   
-
-# Plot: Class distribution across patients
-# ------------------------------------------------------------------------------
-joined_data_aug %>% 
-  ggplot(mapping = aes(Class, fill = Class)) +
-  geom_bar() +
-  theme_bw(base_family = "Times", 
-           base_size = 12) +
-  labs(y = "Count",
-       title = "Class distribution across patients") +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                  size = 18))
-
-ggsave(filename = "results/03_EDA_class_distribution.png",
-       device = "png",
-       height = 5)    
-
-
-# BOXPLOTS: combining 4x plots into one canvas
-# ------------------------------------------------------------------------------
-# Mappings between the subsets and the plotting function:
-# Creating a separate plot while gettign colored individually, to be combined later
+## Create individual boxplots
 p1_boxplot <- plotting_boxplot(data = joined_data_full_aug, 
                                subset_term = "Basal", 
                                color = "red",
@@ -123,6 +74,7 @@ p2_boxplot <- p2_boxplot + theme(legend.position = "none")
 p3_boxplot <- p3_boxplot + theme(legend.position = "none")
 p4_boxplot <- p4_boxplot + theme(legend.position = "none")
 
+
 # Combine the 4 plots and the shared legend
 plot_EDA2_boxplot_combo <- grid.arrange(p1_boxplot,
                                         p2_boxplot, 
@@ -139,5 +91,59 @@ plot_EDA2_boxplot_combo <- grid.arrange(p1_boxplot,
                                                               c(5,5))) 
 
 ggsave(plot = plot_EDA2_boxplot_combo, filename = "results/03_EDA_boxplot_combined.png",
+       device = "png",
+       height = 5)
+
+
+
+# Histogram: Age distribution in different cancer types ------------------------
+joined_data_aug %>% 
+  ggplot(mapping = aes(x = Age_at_Initial_Pathologic_Diagnosis, 
+                       fill = Class)) +
+  geom_histogram(binwidth = 10) +
+  scale_x_continuous(breaks = seq(20, 100, 10)) + 
+  labs(title = "Age distribution in different cancer types",
+       x = 'Age',
+       y = 'Count') +
+  theme_bw(base_family = "Times", 
+           base_size = 15) +
+  theme(plot.title = element_text(hjust = 0.5, 
+                                size = 18)) 
+
+ggsave(filename = "results/03_EDA_age_distribution.png", 
+       device = "png",
+       height = 5)
+
+
+
+# Barplot: Gender distribution -----------------------------------------------
+joined_data_aug %>% 
+  ggplot(mapping = aes(Gender)) +
+  geom_bar() +
+  theme_bw(base_family = "Times", 
+           base_size = 15) +
+  labs(y = "Count",
+       title = "Gender distribution") +
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  size = 18))
+
+ggsave(filename = "results/03_EDA_gender_vs_tumortype.png", 
+       device = "png",
+       height = 5)   
+
+
+
+# Barplot: Class distribution across patients --------------------------------
+joined_data_aug %>% 
+  ggplot(mapping = aes(Class, fill = Class)) +
+  geom_bar() +
+  theme_bw(base_family = "Times", 
+           base_size = 12) +
+  labs(y = "Count",
+       title = "Class distribution across patients") +
+  theme(plot.title = element_text(hjust = 0.5, 
+                                  size = 18))
+
+ggsave(filename = "results/03_EDA_class_distribution.png",
        device = "png",
        height = 5)

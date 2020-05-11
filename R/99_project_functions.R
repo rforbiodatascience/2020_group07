@@ -37,7 +37,11 @@ plotting_boxplot <- function(data, subset_term, color,
     pivot_longer(cols = starts_with('NP_')) %>%
     ggplot(aes(y = reorder(patient_ID, value,FUN = median), 
                x = value)) + 
-    geom_boxplot(alpha=0.5,
+    annotate("rect", 
+             xmin= control_range[1], xmax=control_range[2], # supply from data
+             ymin=-Inf, ymax=Inf,
+             alpha=0.3, fill= control_range_colour) +
+    geom_boxplot(alpha=0.7,
                  varwidth = TRUE,
                  outlier.shape = NA,
                  fill = color) + 
@@ -65,11 +69,8 @@ plotting_boxplot <- function(data, subset_term, color,
     theme(legend.position = "bottom",
           axis.text.y = element_blank(),
           plot.title = element_text(hjust = 0.5,
-                                    size = 20)) +
-    annotate("rect", 
-             xmin= control_range[1], xmax=control_range[2], # supply from data
-             ymin=-Inf, ymax=Inf,
-             alpha=0.3, fill= control_range_colour) 
+                                    size = 20))
+
   return(plot)
 }
 

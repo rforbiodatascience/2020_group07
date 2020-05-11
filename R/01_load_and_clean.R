@@ -14,7 +14,7 @@ proteome_data <- read_csv(file = "data/_raw/77_cancer_proteomes_CPTAC_itraq.csv"
 
 # Wrangle data ------------------------------------------------------------
 
-# 1. Clean PAM50 data =====================================================
+# 1. Clean PAM50 data
 PAM50_clean <- PAM50 %>%
   # Remove redundant column
   select(-Species) %>% 
@@ -26,7 +26,7 @@ PAM50_clean <- PAM50 %>%
          gene_name = "Gene Name") 
 
 
-# 2. Clean proteome data ==================================================
+# 2. Clean proteome data
 
 ## Identify patient_ID replicates 
 replicates <- colnames(proteome_data) %>% 
@@ -60,7 +60,7 @@ proteome_data_clean <- proteome_data %>%
               values_from = "value") 
 
 
-# 3. Clean clinical data =================================================
+# 3. Clean clinical data
 
 clinical_data_clean <- clinical_data %>% 
   # Change non-syntactic column names

@@ -152,12 +152,14 @@ plot1 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2, 
              colour = Class)) +
-  geom_point(size=3) +
+  geom_point(size = 2) +
   labs(title = "Original data",
        x = 'PC1',
        y = 'PC2',
        colour = "True class") +
-  theme(plot.title = element_text(hjust = 0.5),
+  theme_bw(base_family = "Times", 
+           base_size = 16) +
+  theme(plot.title = element_text(size = 14, hjust = 0.5),
         legend.position = "bottom",
         legend.title.align = 0.5,
         legend.title = element_text (size = 14),
@@ -173,14 +175,16 @@ plot2 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2,
              colour = cluster_original)) +
-  geom_point(size=3) +
+  geom_point(size = 2) +
   labs(title = "Clusters on original data",
        subtitle = paste0("accuracy = ", round(accuracy[[1]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
        colour = "clusters") +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+  theme_bw(base_family = "Times", 
+           base_size = 16) +
+  theme(plot.title = element_text(size = 14, hjust = 0.5),
+        plot.subtitle = element_text(size = 12, hjust = 0.5), 
         legend.position = "bottom",
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
@@ -195,14 +199,16 @@ plot3 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2, 
              colour = cluster_pca)) +
-  geom_point(size=3) +
+  geom_point(size = 2) +
   labs(title = "Clusters on PCA data",
        subtitle = paste0("accuracy = ", round(accuracy[[2]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
        colour = "clusters") +
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+  theme_bw(base_family = "Times", 
+           base_size = 16) +
+  theme(plot.title = element_text(size = 14, hjust = 0.5),
+        plot.subtitle = element_text(size = 12, hjust = 0.5), 
         legend.position = "bottom",
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),

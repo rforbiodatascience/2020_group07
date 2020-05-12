@@ -24,9 +24,17 @@ The data was originally found on Kaggle:
 <https://www.kaggle.com/piotrgrabo/breastcancerproteomes>
 
 
-Software requirements
+Dependencies
 --------------------
-- [R](https://cran.r-project.org/bin/windows/base/)
+- [R](https://cran.r-project.org/bin/windows/base/) >= 3.6.3, including packages:
+  * tidyverse
+  * broom
+  * patchwork
+  * grid
+  * gridExtra
+  * keras
+  * miniconda
+  * tensorflow
 
 
 Installation

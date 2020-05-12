@@ -4,8 +4,6 @@ rm(list = ls())
 
 # Load libraries ----------------------------------------------------------
 library(tidyverse)
-library(ggplot2)
-library(plotly)
 
 
 # Define functions --------------------------------------------------------
@@ -13,14 +11,14 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-data <- read_csv(file = "data/02_joined_data_full_aug.csv")
+joined_data_full_aug <- read_csv(file = "data/02_joined_data_full_aug.csv")
 
 
 # Wrangle data -----------------------------------------------------------
 
 ## Create a subset with only the relevant biomarkers
 
-gene_set <- data %>% 
+gene_set <- joined_data_full_aug %>% 
   # Keep only relevant columns for heatmap
   select(patient_ID, 
          Class, 
@@ -62,7 +60,7 @@ heatmap <- gene_set %>%
                        mid = "white",
                        high = "red",
                        midpoint = 0,
-                       name = "expression \n(iTRAQ \nlog2 ratio)") +
+                       name = "Expression \n(log2 ratio)") +
   theme(panel.grid = element_blank(),
         axis.ticks = element_blank(),
         axis.title.x = element_text(size = 18),

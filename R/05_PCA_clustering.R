@@ -37,11 +37,12 @@ pca <- proteome_data %>%
 ## Scree plot
 pca %>%
   tidy("pcs") %>% 
-  ggplot(aes(x = PC, y = percent)) +
+  ggplot(mapping = aes(x = PC, 
+                       y = percent)) +
   geom_col() +
   labs(title = "Scree plot: PCA proteome data", 
        x = "Principal components",
-       y = "variance explained (%)") +
+       y = "Variance explained (%)") +
   theme(base_size = 18,
         plot.title = element_text(hjust = 1.5, size = 25)) +
   scale_y_continuous(labels = scales::percent) + myplot_aes
@@ -71,7 +72,9 @@ PC2_perc <- pca %>%
 
 ## Scatter proteome data - PC1/PC2
 proteome_pca_aug %>% 
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = Class)) +
+  ggplot(mapping = aes(x = .fittedPC1,
+                       y = .fittedPC2,
+                       colour = Class)) +
   geom_point(size = 3) +
   labs(title = "PCA plot of proteome data", 
        x = str_c("PC1 (", round(PC1_perc * 100, 2), "%)"),
@@ -144,9 +147,9 @@ accuracy <- proteome_pca_cluster_aug %>%
 
 ## Original classes
 plot1 <- proteome_pca_cluster_aug %>%
-  ggplot(aes(x = .fittedPC1, 
-             y = .fittedPC2, 
-             colour = Class)) +
+  ggplot(mapping = aes(x = .fittedPC1,
+                       y = .fittedPC2,
+                       colour = Class)) +
   geom_point(size = 2) +
   labs(title = "Original data",
        x = 'PC1',
@@ -166,9 +169,9 @@ plot1 <- proteome_pca_cluster_aug %>%
 
 ## Clusters on original data
 plot2 <- proteome_pca_cluster_aug %>%
-  ggplot(aes(x = .fittedPC1, 
-             y = .fittedPC2,
-             colour = cluster_original)) +
+  ggplot(mapping = aes(x = .fittedPC1,
+                       y = .fittedPC2,
+                       colour = cluster_original)) +
   geom_point(size = 2) +
   labs(title = "Clusters on original data",
        subtitle = paste0("accuracy = ", round(accuracy[[1]], 1), "%"),
@@ -189,9 +192,9 @@ plot2 <- proteome_pca_cluster_aug %>%
 
 ## Clusters on dimensionality-reduced data (first 2 PCs)
 plot3 <- proteome_pca_cluster_aug %>%
-  ggplot(aes(x = .fittedPC1, 
-             y = .fittedPC2, 
-             colour = cluster_pca)) +
+  ggplot(mapping = aes(x = .fittedPC1,
+                       y = .fittedPC2,
+                       colour = cluster_pca)) +
   geom_point(size = 2) +
   labs(title = "Clusters on PCA data",
        subtitle = paste0("accuracy = ", round(accuracy[[2]], 1), "%"),

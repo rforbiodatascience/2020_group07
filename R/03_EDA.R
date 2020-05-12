@@ -37,7 +37,7 @@ control_range <- joined_data_full_aug %>%
             max = max(upper)) %>%
   unlist()
 
-
+# Wrangle joined_data_aug specific for this script
 joined_data_aug <- joined_data_aug %>%
   # Remove controls, since there are too few samples in this group
   filter(Class != "Control")  %>% 
@@ -107,7 +107,8 @@ ggsave(plot = plot_EDA2_boxplot_combo, filename = "results/03_EDA_boxplot_combin
 
 # Barplot: Class distribution-----------------------------------------------
 joined_data_aug %>% 
-  ggplot(mapping = aes(Class, fill = Class)) +
+  ggplot(mapping = aes(x = Class, 
+                       fill = Class)) +
   geom_bar(alpha = 0.8) +
   theme_bw(base_family = "Times", 
            base_size = 15) +

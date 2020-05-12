@@ -98,6 +98,7 @@ model %>%
 
 
 # Train model -------------------------------------------------------------
+
 history <- model %>%
   fit(x = X_train,
       y = y_train,
@@ -144,9 +145,9 @@ results <- bind_rows(
          data_type = 'train')) %>%
   # Factor the columns to get training data before test in plot
   mutate(data_type = factor(data_type, 
-                          levels = c('train', 'test')))
+                          levels = c('train', 'test'))) 
 
-my_counts <- results %>% 
+pred_counts <- results %>% 
   count(y_pred, y_true, data_type) %>%
   # Factor the columns to get training data before test in plot
   mutate(data_type = factor(data_type,
@@ -155,22 +156,28 @@ my_counts <- results %>%
 
 
 # Visualise model performance ---------------------------------------------
-title <- paste0('Confusion matrix of Neural Network for cancer class prediction')
-sub_title <- paste0("Training Accuracy = ", acc_train, "%, n = ", nrow(X_train), ". ",
-                   "Test Accuracy = ", acc_test, "%, n = ", nrow(X_test), ".")
 
-## Plot results
 results %>%
-  ggplot(mapping = aes(x = y_pred, y = y_true, fill = Correct)) +
-  geom_jitter(pch = 21, size = 6, alpha = 0.3) +
-  geom_text(data = my_counts, aes(x = y_pred, y = y_true, label = n),
-            size = 18, inherit.aes = FALSE) +
-  xlab('Class predicted by ANN') +
-  ylab('Class from clinical data') +
-  ggtitle(label = title, subtitle = sub_title) +
+  ggplot() +
+  geom_jitter(mapping = aes(x = y_pred, 
+                            y = y_true, 
+                            color = Correct),
+              size = 6, 
+              alpha = 0.3) +
+  geom_text(data = pred_counts, 
+            mapping = aes(x = y_pred, 
+                          y = y_true, 
+                          label = n),
+            size = 18) +
+  labs(x = "Class predicted by ANN",
+       y = "Class from clinical data",
+       title = "Confusion matrix of Neural Network for cancer class prediction", 
+       subtitle = paste0("Training Accuracy = ", acc_train, "%, n = ", nrow(X_train), ". ",
+                         "Test Accuracy = ", acc_test, "%, n = ", nrow(X_test), ".")) +
   theme_bw(base_family = "Times", 
            base_size = 14) +
-  facet_wrap(~data_type, nrow = 1)
+  facet_wrap(~data_type, 
+             nrow = 1)
 
 ggsave(filename = "results/06_ANN_performance.png", 
        device = "png")

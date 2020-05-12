@@ -47,7 +47,7 @@ proteome_data_clean <- proteome_data %>%
   # Remove replicate columns
   select(-replicates) %>% 
   # Simplify ID name
-  rename_all(funs(stringr::str_replace_all(., 
+  rename_all(funs(stringr::str_replace_all(string = ., 
                                            pattern = '\\..*', 
                                            replacement = ''))) %>% 
   # Transpose tibble:
@@ -64,7 +64,7 @@ proteome_data_clean <- proteome_data %>%
 
 clinical_data_clean <- clinical_data %>% 
   # Change non-syntactic column names
-  rename_all(funs(str_replace_all(.,
+  rename_all(funs(str_replace_all(string = .,
                                   pattern = c(" "), 
                                   replacement = "_"))) %>%
   rename_all(funs(str_replace_all(.,

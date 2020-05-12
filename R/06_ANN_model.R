@@ -131,7 +131,7 @@ results <- bind_rows(
          y_pred = model %>%
            predict_classes(X_test) %>%
            factor,
-         Correct = ifelse(y_true == y_pred ,"yes", "no") %>%
+         Correct = ifelse(y_true == y_pred ,"Yes", "No") %>%
            factor,
          data_type = 'test'),
   tibble(y_true = y_train %>%
@@ -140,7 +140,7 @@ results <- bind_rows(
          y_pred = model %>%
            predict_classes(X_train) %>%
            factor,
-         Correct = ifelse(y_true == y_pred ,"yes", "no") %>%
+         Correct = ifelse(y_true == y_pred ,"Yes", "No") %>%
            factor,
          data_type = 'train')) %>%
   # Factor the columns to get training data before test in plot

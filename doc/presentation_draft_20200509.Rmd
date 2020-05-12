@@ -118,7 +118,7 @@ knitr::include_graphics("Rmd_sup/DS_steps.PNG")
 
 ## Material and Methods {data-background=#ffffff}
 ```{r, out.width = "950px", fig.align = 'center'}
-knitr::include_graphics("../doc/Rmd_sup/currentfiles.png")
+knitr::include_graphics("../doc/Rmd_sup/currentfiles.PNG")
 ```
 
 

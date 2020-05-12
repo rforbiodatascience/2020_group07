@@ -18,6 +18,8 @@ data <- read_csv(file = "data/02_joined_data_full_aug.csv")
 
 # Wrangle data -----------------------------------------------------------
 
+## Create a subset with only the relevant biomarkers
+
 gene_set <- data %>% 
   # Keep only relevant columns for heatmap
   select(patient_ID, 
@@ -48,27 +50,42 @@ gene_set <- data %>%
 
 
 # Create heatmap ----------------------------------------------------------
+
 heatmap <- gene_set %>% 
-  ggplot(mapping = aes(RefSeq, patient_ID, fill = ITRAQ_log2_ratio)) +
+  ggplot(mapping = aes(x = RefSeq, 
+                       y = patient_ID, 
+                       fill = ITRAQ_log2_ratio)) +
   geom_tile() +
-  facet_grid(Class ~ ., scales = "free") +
+  facet_grid(Class ~ ., 
+             scales = "free") +
   scale_fill_gradient2(low = "darkblue",
                        mid = "white",
                        high = "red",
                        midpoint = 0,
-                       name = "ITRAQ log2 ratio") +
+                       name = "expression \n(iTRAQ \nlog2 ratio)") +
   theme(panel.grid = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_text(size = 10),
+        axis.title.x = element_text(size = 18),
+        axis.text.x = element_text(size = 18, 
+                                   angle = 50,
+                                   hjust = 1),
         axis.text.y = element_blank(),
-        plot.title = element_text(size = 15),
-        legend.title = element_text(size = 10),
-        legend.text = element_text(size = 10),
+        strip.text.y = element_text( face = "bold", 
+                                    size = 18),
+        plot.title = element_text(size = 21,
+                                  hjust = 0.5,
+                                  face = "bold"),
+        legend.title = element_text(size = 18,
+                                    hjust = 0.5),
+        legend.text = element_text(size = 18),
         panel.spacing.y = unit(0.1, "cm")) +
-  labs(title = "Expression of common biomarkers in breast \ncancer across tumor classes",
-       x = NULL,
-       y = NULL)
+  labs(title = "Protein expression of common biomarkers in breast cancer",
+       x = "Biomarkers",
+       y = NULL) +
+  
   
 ggsave(filename = "results/04_heatmap.png", 
-       device = "png")
+       device = "png",
+       scale = 2.0,
+       dpi = 300)
 

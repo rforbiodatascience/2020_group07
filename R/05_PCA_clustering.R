@@ -48,7 +48,7 @@ pca %>%
   scale_y_continuous(labels = scales::percent) + myplot_aes
 
 ggsave(filename = "results/05_PCA_scree_plot.png", device = "png",
-       height = 5)
+       scale = 1.5)
 
 
 ## Augment and add y class
@@ -82,7 +82,7 @@ proteome_pca_aug %>%
 
 ggsave(filename = "results/05_PCA.png", 
        device = "png",
-       height = 5)
+       scale = 1.5)
 
 
 
@@ -157,9 +157,14 @@ plot1 <- proteome_pca_cluster_aug %>%
        x = 'PC1',
        y = 'PC2',
        colour = "True class") +
+<<<<<<< HEAD
   theme_bw(base_family = "Times", 
            base_size = 16) +
   theme(plot.title = element_text(size = 14, hjust = 0.5),
+=======
+  myplot_aes +
+  theme(plot.title = element_text(hjust = 0.5),
+>>>>>>> f37b22701fe8aebb9ee3f506ee920dc7e2ec9f64
         legend.position = "bottom",
         legend.title.align = 0.5,
         legend.title = element_text (size = 14),
@@ -167,7 +172,8 @@ plot1 <- proteome_pca_cluster_aug %>%
         legend.key.size = unit (0.1, "cm")) +
   guides(colour = guide_legend( title.position = "top",
                                 nrow = 2,
-                                byrow = TRUE))
+                                byrow = TRUE)) +
+  myplot_aes
 
 
 ## Clusters on original data
@@ -175,16 +181,27 @@ plot2 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2,
              colour = cluster_original)) +
+<<<<<<< HEAD
   geom_point(size = 2) +
   labs(title = "Clusters on original data",
+=======
+  geom_point(size=3) +
+  labs(title = "Clustering: original data",
+>>>>>>> f37b22701fe8aebb9ee3f506ee920dc7e2ec9f64
        subtitle = paste0("accuracy = ", round(accuracy[[1]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
        colour = "clusters") +
+<<<<<<< HEAD
   theme_bw(base_family = "Times", 
            base_size = 16) +
   theme(plot.title = element_text(size = 14, hjust = 0.5),
         plot.subtitle = element_text(size = 12, hjust = 0.5), 
+=======
+  myplot_aes +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+>>>>>>> f37b22701fe8aebb9ee3f506ee920dc7e2ec9f64
         legend.position = "bottom",
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
@@ -199,22 +216,34 @@ plot3 <- proteome_pca_cluster_aug %>%
   ggplot(aes(x = .fittedPC1, 
              y = .fittedPC2, 
              colour = cluster_pca)) +
+<<<<<<< HEAD
   geom_point(size = 2) +
   labs(title = "Clusters on PCA data",
+=======
+  geom_point(size=3) +
+  labs(title = "Clustering: PCA data",
+>>>>>>> f37b22701fe8aebb9ee3f506ee920dc7e2ec9f64
        subtitle = paste0("accuracy = ", round(accuracy[[2]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
        colour = "clusters") +
+<<<<<<< HEAD
   theme_bw(base_family = "Times", 
            base_size = 16) +
   theme(plot.title = element_text(size = 14, hjust = 0.5),
         plot.subtitle = element_text(size = 12, hjust = 0.5), 
+=======
+  myplot_aes +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+>>>>>>> f37b22701fe8aebb9ee3f506ee920dc7e2ec9f64
         legend.position = "bottom",
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 10),
         legend.key.size = unit(0.1,"cm")) +
   guides(colour = guide_legend(title.position = "top")) 
+
 
 
 

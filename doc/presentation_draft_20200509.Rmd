@@ -7,6 +7,7 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   ioslides_presentation:
     widescreen: true
+    logo: Rmd_sup/logo.png
 
 ---
 <style>
@@ -19,7 +20,7 @@ article p, article li, article li.build, section p, section li{
   color: Black;
 }
 h2 { /* Header 2 */
-font-size: 24px;
+font-size: 30px;
 #color: Black;
 }
   
@@ -27,6 +28,8 @@ body{ /* Normal */
 font-size: 8px;
 color: Black;
 }
+
+
 </style>
 
 h2.title {
@@ -48,129 +51,127 @@ rm(list = ls())
 # ------------------------------------------------------------------------------
 library("tidyverse")
 
-# Define functions (DELETE IF NOT USED)
-# ------------------------------------------------------------------------------
-# Load data
-# ------------------------------------------------------------------------------
-# 
-# df <- read_csv(file = "../data/02_joined_data_aug.csv")
-# 
-# # check the datasets in tables
-# proteome_raw_data <- as_tibble(read_csv(file = "../data/_raw/77_cancer_proteomes_CPTAC_itraq.csv")) # -> rows x cols - 12,553 x 86
-# clinical_raw_data <- as_tibble(read_csv(file = "../data/_raw/clinical_data_breast_cancer.csv"))  # -> rows x cols - 105 x 30
-# pam50_raw_data <- as_tibble(read_csv(file = "../data/_raw/PAM50_proteins.csv"))
 ```
 
 
 
 ## Introduction {data-background="Rmd_sup/breast.jpg" data-background-size=cover}
-### Dataset:
+### Data set:
+
 * breast cancer
 
 * proteomics by mass spectrometry
 
-### Goal:
-* Explore the dataset for patterns
-
-* Create models to identify the breast cancer subclasses
-
-
-## Materials and Methods: {data-background=#ffffff}
-### Dataset:
-```{r,  out.width =  "800px"}
-knitr::include_graphics("Rmd_sup/datasets.PNG")
+* four cancer classes:
+  
+```{r, out.width =  "40%", fig.align='left'}
+knitr::include_graphics("Rmd_sup/classes.png")
 ```
 
-## Materials and Methods: {data-background=#ffffff}
 
-* Exploratory analysis
+### Goal:
+* Explore the data to identify patterns
 
-* PCA
+* Create models to predict breast cancer class
 
-* K-means
 
-* ANN
+<!-- ## Materials and Methods: {data-background=#ffffff} -->
+<!-- ### Dataset: -->
+<!-- ```{r,  out.width =  "800px"} -->
+<!-- knitr::include_graphics("Rmd_sup/datasets.PNG") -->
+<!-- ``` -->
 
-```{r,  out.width =  "800px"}
+
+
+
+## Material and Methods {data-background=#ffffff}
+
+```{r, out.width =  "750px", fig.align='center'}
+knitr::include_graphics("Rmd_sup/dataset.png")
+```
+
+
+## Material and Methods {data-background=#ffffff}
+
+```{r,out.width =  "1000px"}
+knitr::include_graphics("Rmd_sup/clean_augment.png")
+```
+
+## Material and Methods {data-background=#ffffff}
+
+<!-- * Exploratory analysis -->
+
+<!-- * PCA -->
+
+<!-- * K-means -->
+
+<!-- * ANN -->
+
+```{r,  out.width =  "600px", fig.align = 'center'}
+knitr::include_graphics("Rmd_sup/models.png")
+```
+  
+  
+```{r,  out.width =  "600px", fig.align = 'center'}
 knitr::include_graphics("Rmd_sup/DS_steps.PNG")
 ```
 
-## Materials and Methods: {data-background=#ffffff}
-
-```{r, out.width =  "750px"}
-knitr::include_graphics("Rmd_sup/process1.PNG")
-```
-
-## Materials and Methods: {data-background=#ffffff}
-
-```{r,out.width =  "900px"}
-knitr::include_graphics("Rmd_sup/process2.PNG")
+## Material and Methods {data-background=#ffffff}
+```{r, out.width = "950px", fig.align = 'center'}
+knitr::include_graphics("../doc/Rmd_sup/currentfiles.png")
 ```
 
 
-## No definitive effects between expression landscapes and specific tumor subclasses {data-background=#ffffff}
+## Results --- no outliers on total protein expression {data-background=#ffffff}
 
-```{r,  out.width =  "750px"}
+```{r,  out.width =  "750px", fig.align = 'center'}
 knitr::include_graphics("../results/03_EDA_boxplot_combined.png")
 ```
 
 
-## Breast cancer subtypes in the dataset are well represented {data-background=#ffffff}
+## Results --- breast cancer classes in the dataset are well represented  {data-background=#ffffff}
 
-```{r,  out.width =  "770px"}
+```{r,  out.width =  "700px", fig.align = 'center'}
 knitr::include_graphics("../results/03_EDA_class_distribution.png")
 ```
 
-## Breast cancer subtypes do not discriminate on age {data-background=#ffffff}
-
-```{r,  out.width =  "770px"}
+## Results --- breast cancer classes do not discriminate on age {data-background=#ffffff}
+```{r,  out.width =  "850px", fig.align = 'center'}
 knitr::include_graphics("../results/03_EDA_age_distribution.png")
 ```
 
-## Breast cancer and gender {data-background=#ffffff}
-
-```{r,  out.width =  "770px"}
+## Results --- breast cancer and gender {data-background=#ffffff}
+```{r,  out.width =  "700px", fig.align = 'center'}
 knitr::include_graphics("../results/03_EDA_gender_vs_tumortype.png")
 ```
 
-## Heatmap {data-background=#ffffff}
 
-```{r, out.width =  "700px"}
+## Results --- protein expresion heatmap {data-background=#ffffff}
+```{r, out.width =  "750px", fig.align = 'center'}
 knitr::include_graphics("../results/04_heatmap.png")
 ```
 
-## Dimentionality reduction {data-background=#ffffff}
-
-```{r, out.width =  "800px"}
+## Results --- dimentionality reduction {data-background=#ffffff}
+```{r, out.width =  "600px"}
 knitr::include_graphics("../results/05_PCA.png")
 ```
 
 
-## K-means clustering {data-background=#ffffff}
-
+## Results --- K-means clustering  {data-background=#ffffff}
 ```{r, out.width =  "800px"}
 knitr::include_graphics("../results/05_PCA_kmeans.png")
 ```
 
-## ANN model's structure {data-background=#ffffff}
-
+## Results --- ANN model's structure {data-background=#ffffff}
 ```{r,out.width = "1000px"}
 knitr::include_graphics("../doc/Rmd_sup/ANN_structure.png")
 ```
 
-## ANN performance {data-background=#ffffff}
-
+## Results --- ANN performance {data-background=#ffffff}
 ```{r, out.width="700px", fig.align="center"}
 knitr::include_graphics("../results/06_ANN_performance.png")
 ```
 
-
-## File structure and reproducibility {data-background=#ffffff}
-
-
-```{r, out.width="800px"}
-knitr::include_graphics("../doc/Rmd_sup/currentfiles.PNG")
-```
 
 ## Discussion {data-background=#ffffff}
 
@@ -179,10 +180,11 @@ knitr::include_graphics("../doc/Rmd_sup/currentfiles.PNG")
 
 * further work
 
+
 ## The end {data-background="Rmd_sup/final2.jpg" data-background-size=cover}
 
 ```{r, out.width="100px", fig.align="right"}
-knitr::include_graphics("../doc/Rmd_sup/logo.jpg")
+knitr::include_graphics("../doc/Rmd_sup/breast_cancer_logo.jpg")
 ```
 
 

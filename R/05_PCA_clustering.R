@@ -169,9 +169,7 @@ plot2 <- proteome_pca_cluster_aug %>%
              y = .fittedPC2,
              colour = cluster_original)) +
   geom_point(size = 2) +
-  labs(title = "Clusters on original data") +
-  geom_point(size=3) +
-  labs(title = "Clustering: original data",
+  labs(title = "Clusters on original data",
        subtitle = paste0("accuracy = ", round(accuracy[[1]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
@@ -194,9 +192,7 @@ plot3 <- proteome_pca_cluster_aug %>%
              y = .fittedPC2, 
              colour = cluster_pca)) +
   geom_point(size = 2) +
-  labs(title = "Clusters on PCA data") +
-  geom_point(size=3) +
-  labs(title = "Clustering: PCA data",
+  labs(title = "Clusters on PCA data",
        subtitle = paste0("accuracy = ", round(accuracy[[2]], 1), "%"),
        x = 'PC1',
        y = 'PC2',

@@ -82,7 +82,8 @@ proteome_pca_aug %>%
 
 ggsave(filename = "results/05_PCA.png", 
        device = "png",
-       scale = 1.5)
+       height = 5,
+       dpi = 300)
 
 
 
@@ -213,7 +214,7 @@ plot3 <- proteome_pca_cluster_aug %>%
 (plot1 + plot2 + plot3) 
 
 ggsave(filename = "results/05_PCA_kmeans.png", device = "png",
-       scale = 1.5,
+       height = 5,
        dpi = 300)
 
 

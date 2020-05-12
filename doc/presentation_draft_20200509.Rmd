@@ -41,20 +41,6 @@ text-align: center;
 knitr::opts_chunk$set(echo = FALSE, out.width =  "700px", fig.align="center")
 ```
 
-
-```{r, echo=FALSE,message=FALSE}
-# Clear workspace
-# ------------------------------------------------------------------------------
-rm(list = ls())
-
-# Load libraries
-# ------------------------------------------------------------------------------
-library("tidyverse")
-
-```
-
-
-
 ## Introduction {data-background="Rmd_sup/breast.jpg" data-background-size=cover}
 ### Data set:
 
@@ -152,13 +138,13 @@ knitr::include_graphics("../results/04_heatmap.png")
 ```
 
 ## Results --- dimentionality reduction {data-background=#ffffff}
-```{r, out.width =  "600px"}
+```{r, out.width =  "750px"}
 knitr::include_graphics("../results/05_PCA.png")
 ```
 
 
 ## Results --- K-means clustering  {data-background=#ffffff}
-```{r, out.width =  "800px"}
+```{r, out.width =  "830px"}
 knitr::include_graphics("../results/05_PCA_kmeans.png")
 ```
 

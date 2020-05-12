@@ -35,8 +35,8 @@ plotting_boxplot <- function(data, subset_term, color,
            Class) %>%
     subset(Class == subset_term) %>%
     pivot_longer(cols = starts_with('NP_')) %>%
-    ggplot(aes(y = reorder(patient_ID, value,FUN = median), 
-               x = value)) + 
+    ggplot(mapping = aes(y = reorder(patient_ID, value, FUN = median),
+                         x = value)) + 
     annotate("rect", 
              xmin = control_range[1], 
              xmax = control_range[2], # supply from data

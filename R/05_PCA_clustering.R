@@ -27,7 +27,6 @@ proteome_data <- joined_data_aug %>%
   select(starts_with("NP"))            
 
 
-
 # PCA ---------------------------------------------------------------------
 
 ## Compute PCA

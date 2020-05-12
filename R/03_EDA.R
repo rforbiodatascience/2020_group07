@@ -27,12 +27,20 @@ joined_data_full_aug <-  read_csv(file = "data/02_joined_data_full_aug.csv")
 
 # Get the Control sample range (for the boxplot)
 control_range <- joined_data_full_aug %>%
+  # Select control observations (rows)
   filter(Class != "Control") %>%
+  # Select ID and gene variables (columns)
   select(patient_ID, starts_with("NP_")) %>%
-  pivot_longer(cols = -patient_ID) %>% 
+  # Make tibble longer
+  pivot_longer(cols = -patient_ID,
+               names_to = "genes",
+               values_to = "value") %>% 
+  # We want the statistics grouped by patient
   group_by(patient_ID) %>% 
+  # Find IQR for each patient
   summarise(lower = quantile(value, 0.25), 
             upper = quantile(value, 0.75)) %>% 
+  # Find minimum and maximum value of IQR
   summarise(min = min(lower), 
             max = max(upper)) %>%
   unlist()

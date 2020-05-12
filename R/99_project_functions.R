@@ -68,11 +68,10 @@ plotting_boxplot <- function(data, subset_term, color,
                  shape = 23, 
                  size = 1) +
     theme_bw(base_family = "Times", 
-             base_size = 20) +
+             base_size = 16) +
     theme(legend.position = "bottom",
           legend.title = element_text(size = 15),
           axis.text.x = element_text(size = 18),
-          axis.text.y.left = element_text(size = 18),
           axis.text.y = element_blank(),
           plot.title = element_text(hjust = 0.5,
                                     size = 22))

@@ -28,7 +28,7 @@ joined_data_full_aug <-  read_csv(file = "data/02_joined_data_full_aug.csv")
 # Get the Control sample range (for the boxplot)
 control_range <- joined_data_full_aug %>%
   # Select control observations (rows)
-  filter(Class != "Control") %>%
+  filter(Class == "Control") %>%
   # Select ID and gene variables (columns)
   select(patient_ID, starts_with("NP_")) %>%
   # Make tibble longer

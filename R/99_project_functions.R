@@ -88,8 +88,9 @@ plotting_boxplot <- function(data, subset_term,
 
 ## to be consistent across all plots
 myplot_aes <- theme_bw(base_family = "Times", 
-                         base_size = 18) +
-              theme(plot.title = element_text(hjust = 0.5, 
-                                              size = 25),
+                       base_size = 16) +
+              theme(plot.title = element_text(size = 18,
+                                              face = "bold"),
+                    plot.subtitle = element_text(size = 14),
                     legend.position = "bottom")
 

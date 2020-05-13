@@ -20,6 +20,7 @@ joined_data_full_aug <- read_csv(file = "data/02_joined_data_full_aug.csv")
 
 biomarker_subset <- joined_data_full_aug %>% 
   # Keep only relevant columns for heatmap
+  # Selection based on literature review of BC genes
   select(patient_ID, 
          Class, 
          NP_000537, 
@@ -61,25 +62,28 @@ biomarker_subset %>%
                        high = "red",
                        midpoint = 0,
                        name = "Expression \n(log2 ratio)") +
+  theme_grey(base_family = "Times",
+             base_size = 16) + 
   theme(panel.grid = element_blank(),
         axis.ticks = element_blank(),
-        axis.title.x = element_text(size = 18),
-        axis.text.x = element_text(size = 18, 
-                                   angle = 50,
+        #axis.title.x = element_text(size = 18),
+        axis.text.x = element_text(size = 16, 
+                                   angle = 45,
                                    hjust = 1),
         axis.text.y = element_blank(),
-        strip.text.y = element_text( face = "bold", 
-                                    size = 18),
-        plot.title = element_text(size = 21,
-                                  hjust = 0.5,
+        strip.text.y = element_text(face = "bold", 
+                                    size = 16),
+        plot.title = element_text(size = 18,
                                   face = "bold"),
-        legend.title = element_text(size = 18,
+        plot.subtitle = element_text(size = 14),
+        legend.title = element_text(size = 16,
                                     hjust = 0.5),
-        legend.text = element_text(size = 18),
+        legend.text = element_text(size = 14),
         panel.spacing.y = unit(0.1, "cm")) +
-  labs(title = "Protein expression of common biomarkers in breast cancer",
+  labs(title = "Expression of breast cancer biomarkers",
+       subtitle = "Expression profiles of genes commonly associated with breast cancer",
        x = "Biomarkers",
-       y = NULL)
+       y = NULL) 
   
   
 ggsave(filename = "results/04_heatmap.png", 

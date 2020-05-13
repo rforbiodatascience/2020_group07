@@ -42,12 +42,11 @@ pca %>%
   labs(title = "Scree plot: PCA proteome data", 
        x = "Principal components",
        y = "Variance explained (%)") +
-  theme(base_size = 18,
-        plot.title = element_text(hjust = 1.5, size = 25)) +
   scale_y_continuous(labels = scales::percent) + myplot_aes
 
-ggsave(filename = "results/05_PCA_scree_plot.png", device = "png",
-       scale = 1.5)
+ggsave(filename = "results/05_PCA_scree_plot.png", 
+       device = "png",
+       scale = 1)
 
 
 ## Augment and add y class
@@ -154,14 +153,15 @@ plot1 <- proteome_pca_cluster_aug %>%
        x = 'PC1',
        y = 'PC2',
        colour = "True class") +
-  theme_bw(base_family = "Times", base_size = 16) +
-  theme(plot.title = element_text(size = 14, hjust = 0.5),
-        legend.position = "bottom",
+  xlim(-10,10) +
+  ylim(-7.5,7.5) +
+  myplot_aes +
+  theme(plot.title = element_text(hjust = 0.5),
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
-        legend.text = element_text(size = 10),
-        legend.key.size = unit (0.1, "cm")) +
-  guides(colour = guide_legend( title.position = "top",
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(0.5, "cm")) +
+  guides(colour = guide_legend(title.position = "top",
                                 nrow = 2,
                                 byrow = TRUE))
 
@@ -176,15 +176,16 @@ plot2 <- proteome_pca_cluster_aug %>%
        subtitle = paste0("accuracy = ", round(accuracy[[1]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
-       colour = "clusters") +
-  theme_bw(base_family = "Times", base_size = 16) +
-  theme(plot.title = element_text(size = 14, hjust = 0.5),
-        plot.subtitle = element_text(size = 12, hjust = 0.5), 
-        legend.position = "bottom",
+       colour = "Clusters") +
+  xlim(-10,10) +
+  ylim(-7.5,7.5) +
+  myplot_aes +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5), 
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
-        legend.text = element_text(size = 10),
-        legend.key.size = unit(0.1,"cm")) +
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(0.5,"cm")) +
   guides(colour = guide_legend (title.position = "top")) 
 
 
@@ -199,15 +200,16 @@ plot3 <- proteome_pca_cluster_aug %>%
        subtitle = paste0("accuracy = ", round(accuracy[[2]], 1), "%"),
        x = 'PC1',
        y = 'PC2',
-       colour = "clusters") +
-  theme_bw(base_family = "Times", base_size = 16) +
-  theme(plot.title = element_text(size = 14, hjust = 0.5),
-        plot.subtitle = element_text(size = 12, hjust = 0.5), 
-        legend.position = "bottom",
+       colour = "Clusters") + 
+  xlim(-10,10) +
+  ylim(-7.5,7.5) +
+  myplot_aes +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5), 
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
-        legend.text = element_text(size = 10),
-        legend.key.size = unit(0.1,"cm")) +
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(0.5,"cm")) +
   guides(colour = guide_legend(title.position = "top")) 
 
 

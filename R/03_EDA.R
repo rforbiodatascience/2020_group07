@@ -6,7 +6,7 @@ rm(list = ls())
 library("tidyverse")
 library("broom")
 library("gridExtra")
-library("grid")
+#library("grid")
 
 
 # Define functions --------------------------------------------------------
@@ -26,6 +26,7 @@ joined_data_full_aug <-  read_csv(file = "data/02_joined_data_full_aug.csv")
 # Wrangle data ------------------------------------------------------------
 
 # Get the Control sample range (for the boxplot)
+# Return the min and max of 25% and 75% IQR respectively
 control_range <- joined_data_full_aug %>%
   # Select control observations (rows)
   filter(Class == "Control") %>%
@@ -88,15 +89,15 @@ p4_boxplot <- p4_boxplot + theme(legend.position = "none")
 
 
 # Combine the 4 plots and the shared legend
-superior_title <- "Protein expression distribution across classes"
+title_main <- "Protein expression landscape across Breat Cancer subclasses"
 
 plot_EDA2_boxplot_combo <- grid.arrange(p1_boxplot,
                                         p2_boxplot, 
                                         p3_boxplot, 
                                         p4_boxplot,
                                         shared_legend,
-                                        top = textGrob(superior_title,
-                                                       gp = gpar(fontsize = 25)),
+                                        top = textGrob(title_main,
+                                                       gp = gpar(fontsize = 22)),
                                         ncol= 2,
                                         widths = c(2.7, 2.7),
                                         nrow = 3,
@@ -115,16 +116,12 @@ ggsave(plot = plot_EDA2_boxplot_combo, filename = "results/03_EDA_boxplot_combin
 
 # Barplot: Class distribution-----------------------------------------------
 joined_data_aug %>% 
-  ggplot(mapping = aes(x = Class, 
-                       fill = Class)) +
+  ggplot(mapping = aes(x = Class, fill = Class)) +
   geom_bar(alpha = 0.8) +
-  theme_bw(base_family = "Times", 
-           base_size = 15) +
   labs(y = "Number of patients",
-       title = "Breast cancer class distribution") +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                  size = 18),
-        legend.position = "none")
+       title = "Distribution of breast cancer subclasses") +
+  myplot_aes +
+  theme(legend.position = "none")
 
 ggsave(filename = "results/03_EDA_class_distribution.png",
        device = "png",
@@ -136,19 +133,14 @@ ggsave(filename = "results/03_EDA_class_distribution.png",
 joined_data_aug %>% 
   ggplot(mapping = aes(x = Age_at_Initial_Pathologic_Diagnosis, 
                        fill = Class)) +
-  geom_histogram(binwidth = 10,
+  geom_histogram(binwidth = 10, 
                  alpha = 0.8) +
   scale_x_continuous(breaks = seq(20, 100, 10)) + 
-  labs(title = "Age distribution",
-       subtitle = "across breast cancer classes",
+  labs(title = "Breast cancer: age at initial diagnosis",
+       subtitle = "Effect of age on tumor subtype prevalence",
        x = 'Age',
        y = 'Number of patients') +
-  theme_bw(base_family = "Times", 
-           base_size = 15) +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                size = 18),
-        plot.subtitle = element_text(hjust = 0.5,
-                                     size = 12)) 
+  myplot_aes 
 
 ggsave(filename = "results/03_EDA_age_distribution.png", 
        device = "png",
@@ -163,12 +155,10 @@ joined_data_aug %>%
   ggplot(mapping = aes(Gender)) +
   geom_bar(fill = "darkblue",
            alpha = 0.75) +
-  theme_bw(base_family = "Times", 
-           base_size = 15) +
+  myplot_aes +
   labs(y = "Number of patients",
-       title = "Gender distribution") +
-  theme(plot.title = element_text(hjust = 0.5, 
-                                  size = 18))
+       title = "Breast cancer occurance among genders")
+
 
 ggsave(filename = "results/03_EDA_gender_vs_tumortype.png", 
        device = "png",

@@ -60,7 +60,8 @@ joined_data_aug <- joined_data_aug %>%
 ## 4 boxplots combined into one canvas
 
 ## Create individual boxplots
-p1_boxplot <- plotting_boxplot(data = joined_data_full_aug, 
+p1_boxplot <- joined_data_full_aug %>% drop_na() %>%
+  plotting_boxplot( 
                                subset_term = "Basal", 
                                color = "red",
                                control_range = control_range)
@@ -125,7 +126,7 @@ joined_data_aug %>%
 
 ggsave(filename = "results/03_EDA_class_distribution.png",
        device = "png",
-       scale = 1,
+       height = 5,
        dpi = 300)
 
 
@@ -140,12 +141,12 @@ joined_data_aug %>%
        subtitle = "Effect of age on tumor subtype prevalence",
        x = 'Age',
        y = 'Number of patients') +
-  myplot_aes 
+  myplot_aes +
+  theme(legend.position = "right")
 
 ggsave(filename = "results/03_EDA_age_distribution.png", 
        device = "png",
-       scale = 1,
-       width = 6,
+       height = 5,
        dpi = 300)
 
 
@@ -162,7 +163,7 @@ joined_data_aug %>%
 
 ggsave(filename = "results/03_EDA_gender_vs_tumortype.png", 
        device = "png",
-       scale = 1,
+       height = 5,
        dpi = 300)   
 
 

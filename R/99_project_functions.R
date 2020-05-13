@@ -40,7 +40,6 @@ plotting_boxplot <- function(data, subset_term,
            Class) %>%
     subset(Class == subset_term) %>%
     pivot_longer(cols = starts_with('NP_')) %>%
-    drop_na() %>%
     ggplot() + 
     geom_rect(aes(xmin = control_range[1], # supply from data
                   xmax = control_range[2], # supply from data
@@ -50,10 +49,7 @@ plotting_boxplot <- function(data, subset_term,
               alpha = 0.3) +
     geom_boxplot(mapping = aes(y = reorder(patient_ID, value, FUN = median),
                                x = value),
-                 fill=color, 
-                 alpha = 0.7, 
-                 varwidth = TRUE, 
-                 outlier.shape = NA) +
+                 fill=color, alpha = 0.7, varwidth = TRUE, outlier.shape = NA) +
     scale_color_manual('Inter Quartile Range',
                        values = 'yellow',  
                        guide = guide_legend(override.aes = list(alpha = 0.1))) +
@@ -94,3 +90,10 @@ myplot_aes <- theme_bw(base_family = "Times",
                     plot.subtitle = element_text(size = 14),
                     legend.position = "bottom")
 
+## PCA combined plot theme
+myPCA_aes <- theme_bw(base_family = "Times", 
+                       base_size = 14) +
+  theme(plot.title = element_text(size = 12,
+                                  face = "bold"),
+        plot.subtitle = element_text(size = 10),
+        legend.position = "bottom")

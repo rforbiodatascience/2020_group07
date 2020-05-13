@@ -88,6 +88,6 @@ biomarker_subset %>%
   
 ggsave(filename = "results/04_heatmap.png", 
        device = "png",
-       scale = 2.0,
+       height = 6,
        dpi = 300)
 

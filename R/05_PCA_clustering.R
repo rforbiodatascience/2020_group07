@@ -42,7 +42,8 @@ pca %>%
   labs(title = "Scree plot: PCA proteome data", 
        x = "Principal components",
        y = "Variance explained (%)") +
-  scale_y_continuous(labels = scales::percent) + myplot_aes
+  scale_y_continuous(labels = scales::percent) + 
+  myplot_aes
 
 ggsave(filename = "results/05_PCA_scree_plot.png", 
        device = "png",
@@ -74,19 +75,17 @@ proteome_pca_aug %>%
                        y = .fittedPC2,
                        colour = Class)) +
   geom_point(size = 3) +
+  xlim(-8,10) +
+  ylim(-7,7) +
   labs(title = "PCA plot of proteome data", 
        x = str_c("PC1 (", round(PC1_perc * 100, 2), "%)"),
        y = str_c("PC2 (", round(PC2_perc * 100, 2), "%)")) +
-  theme_bw() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  myplot_aes
+  myplot_aes 
 
 ggsave(filename = "results/05_PCA.png", 
        device = "png",
        height = 5,
        dpi = 300)
-
-
 
 # K-means clustering ------------------------------------------------------
 
@@ -153,9 +152,9 @@ plot1 <- proteome_pca_cluster_aug %>%
        x = 'PC1',
        y = 'PC2',
        colour = "True class") +
-  xlim(-10,10) +
-  ylim(-7.5,7.5) +
-  myplot_aes +
+  xlim(-8,10) +
+  ylim(-7,7) +
+  myPCA_aes +
   theme(plot.title = element_text(hjust = 0.5),
         legend.title.align = 0.5,
         legend.title = element_text(size = 14),
@@ -177,9 +176,9 @@ plot2 <- proteome_pca_cluster_aug %>%
        x = 'PC1',
        y = 'PC2',
        colour = "Clusters") +
-  xlim(-10,10) +
-  ylim(-7.5,7.5) +
-  myplot_aes +
+  xlim(-8,10) +
+  ylim(-7,7) +
+  myPCA_aes +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5), 
         legend.title.align = 0.5,
@@ -201,9 +200,9 @@ plot3 <- proteome_pca_cluster_aug %>%
        x = 'PC1',
        y = 'PC2',
        colour = "Clusters") + 
-  xlim(-10,10) +
-  ylim(-7.5,7.5) +
-  myplot_aes +
+  xlim(-8,10) +
+  ylim(-7,7) +
+  myPCA_aes +
   theme(plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5), 
         legend.title.align = 0.5,

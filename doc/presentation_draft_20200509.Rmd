@@ -133,12 +133,12 @@ knitr::include_graphics("../results/03_EDA_age_distribution.png")
 knitr::include_graphics("../results/03_EDA_gender_vs_tumortype.png")
 ```
 
-## Results --- protein expresion heatmap {data-background=#ffffff}
+## Results --- protein expression heatmap {data-background=#ffffff}
 ```{r, out.width =  "750px", fig.align = 'center'}
 knitr::include_graphics("../results/04_heatmap.png")
 ```
 
-## Results --- dimentionality reduction {data-background=#ffffff}
+## Results --- dimensionality reduction {data-background=#ffffff}
 ```{r, out.width =  "750px"}
 knitr::include_graphics("../results/05_PCA.png")
 ```

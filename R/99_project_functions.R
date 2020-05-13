@@ -59,11 +59,13 @@ plotting_boxplot <- function(data, subset_term,
     geom_vline(aes(xintercept = control_range[1]), 
                linetype = "solid",
                size=1) +
-    stat_summary(fun = "median",
+    stat_summary(mapping = aes(y = reorder(patient_ID, value, FUN = median),
+                               x = value), 
+                 fun = "median",
                  geom = "point",
                  colour = "white",
                  shape = 23,
-                 size = 0.75) +
+                 size = 0.75) +             # to accent the median point (if vertical lines overlap)
     labs(x = "Log2 Expression levels",
          y = "Patients",
          title = subset_term) +

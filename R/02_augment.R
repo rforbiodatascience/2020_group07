@@ -54,7 +54,7 @@ proteome_data_PAM50_aug <- proteome_data_aug %>%
   mutate(patient_ID = proteome_data_aug$patient_ID)
 
 
-# Join Clinical and Proteome data (full version)
+## Join Clinical and Proteome data (full version)
 joined_data_full_aug <- proteome_data_aug %>%
   right_join(x = clinical_data_aug, 
              y = ., 
@@ -67,7 +67,7 @@ joined_data_full_aug <- proteome_data_aug %>%
                         levels = c("Basal", "HER2", "LumA", "LumB", "Control")))
 
 
-# Join Clinical and Proteome data (PAM50genes filtered version)
+## Join Clinical and Proteome data (PAM50genes filtered version)
 joined_data_PAM50_aug <- proteome_data_PAM50_aug %>%
   right_join(clinical_data_aug, 
              ., 

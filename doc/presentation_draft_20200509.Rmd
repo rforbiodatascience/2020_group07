@@ -164,7 +164,7 @@ knitr::include_graphics("../results/06_ANN_performance.png")
 
 * K-means clustering Acc.: 72.7% - ANN model Acc.: 82.8%
 
-* Collect more data for better performing models
+* Collect more data for building more reliable models
 
 * Combine proteome data with RNAseq data to investigate more associations - network analysis
 

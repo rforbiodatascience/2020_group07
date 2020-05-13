@@ -168,7 +168,7 @@ knitr::include_graphics("../results/06_ANN_performance.png")
 
 * Combine proteome data with RNAseq data to investigate more associations - network analysis
 
-* Tidyverse R package is a smart and elegant tool for data visualization
+* Tidyverse R package is a smart and elegant tool for data analysis and visualization
 
 
 ## The end {data-background="Rmd_sup/final2.jpg" data-background-size=cover}

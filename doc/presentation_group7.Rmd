@@ -61,8 +61,6 @@ knitr::include_graphics("supplementary_figs/02.2.classes.png")
 * Create models to predict breast cancer class
 &nbsp; 
 
-[Project's GitHub repository](https://github.com/rforbiodatascience/2020_group07)
-
 
 ## Material and Methods {data-background=#ffffff}
 
@@ -90,7 +88,9 @@ knitr::include_graphics("supplementary_figs/05.2.tidyverse_workflow.png")
 ```
 
 ## Material and Methods {data-background=#ffffff}
-```{r, out.width = "950px", fig.align = 'center'}
+[Project's GitHub repository](https://github.com/rforbiodatascience/2020_group07)
+
+```{r, out.width = "850px", fig.align = 'center'}
 knitr::include_graphics("../doc/supplementary_figs/06.file_systems_chart.png")
 ```
 
@@ -191,6 +191,7 @@ knitr::include_graphics("../results/06_ANN_performance.png")
 
 
 ## Thank you for your attention {data-background="supplementary_figs/18.1.final_background.jpg" data-background-size=cover}
+[Shiny App](https://rebeka-bat.shinyapps.io/3dheatmap/)
 
 
 

@@ -18,7 +18,7 @@ joined_data_full_aug <- read_csv(file = "data/02_joined_data_full_aug.csv")
 
 ## Create a subset with only the relevant biomarkers
 
-gene_set <- joined_data_full_aug %>% 
+biomarker_subset <- joined_data_full_aug %>% 
   # Keep only relevant columns for heatmap
   select(patient_ID, 
          Class, 
@@ -49,7 +49,7 @@ gene_set <- joined_data_full_aug %>%
 
 # Create heatmap ----------------------------------------------------------
 
-heatmap <- gene_set %>% 
+biomarker_subset %>% 
   ggplot(mapping = aes(x = RefSeq, 
                        y = patient_ID, 
                        fill = ITRAQ_log2_ratio)) +
@@ -79,7 +79,7 @@ heatmap <- gene_set %>%
         panel.spacing.y = unit(0.1, "cm")) +
   labs(title = "Protein expression of common biomarkers in breast cancer",
        x = "Biomarkers",
-       y = NULL) +
+       y = NULL)
   
   
 ggsave(filename = "results/04_heatmap.png", 

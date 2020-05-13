@@ -59,18 +59,16 @@ y_test <- joined_data_prep %>%
 # Define ANN model --------------------------------------------------------
 
 ## Set hyperparameters
-n_hidden_1 <- 40
+input_shape <- 40
+n_hidden_1 <- 30
 h1_activate <- 'relu'
 drop_out_1 <- 0.4
-n_hidden_2 <- 30
+n_hidden_2 <- 40
 h2_activate <- 'relu'
 drop_out_2 <- 0.3
-n_hidden_3 <- 40
+n_hidden_3 <- 30
 h3_activate <- 'relu'
 drop_out_3 <- 0.2
-n_hidden_4 <- 30
-h4_activate <- 'relu'
-drop_out_4 <- 0.1
 n_output   <- 4
 o_ativate  <- 'softmax'
 n_epochs <- 100
@@ -80,14 +78,12 @@ learn_rate <- 0.001
 
 ## Set architecture
 model <- keras_model_sequential() %>% 
-  layer_dense(units = n_hidden_1, activation = h1_activate, input_shape = 40) %>% 
+  layer_dense(units = n_hidden_1, activation = h1_activate, input_shape = input_shape) %>% 
   layer_dropout(rate = drop_out_1) %>% 
   layer_dense(units = n_hidden_2, activation = h2_activate) %>%
   layer_dropout(rate = drop_out_2) %>%
   layer_dense(units = n_hidden_3, activation = h3_activate) %>%
   layer_dropout(rate = drop_out_3) %>%
-  layer_dense(units = n_hidden_4, activation = h4_activate) %>%
-  layer_dropout(rate = drop_out_4) %>%
   layer_dense(units = n_output, activation = o_ativate)
 
 ## Compile model

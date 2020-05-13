@@ -100,6 +100,7 @@ knitr::include_graphics("../doc/Rmd_sup/File_systems_chart.png")
 
 * tidyverse
 * broom
+* stringr
 * patchwork
 * keras/tensorflow
 
@@ -161,11 +162,13 @@ knitr::include_graphics("../results/06_ANN_performance.png")
 ## Discussion {data-background=#ffffff}
 
 
-* What could have been better
+* K-means clustering Acc.: 72.7% - ANN model Acc.: 82.8%
 
-* maybe we can say it is good to merge both omics data and clinical metadata
+* Collect more data for better performing models
 
-* further work
+* Combine proteome data with RNAseq data to investigate more associations - network analysis
+
+* Tidyverse R package is a smart and elegant tool for data visualization
 
 
 ## The end {data-background="Rmd_sup/final2.jpg" data-background-size=cover}

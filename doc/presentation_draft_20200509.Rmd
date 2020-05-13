@@ -169,7 +169,7 @@ knitr::include_graphics("../results/06_ANN_performance.png")
 * Tidyverse R package is a smart and elegant tool for data analysis and visualization
 
 
-## The end {data-background="Rmd_sup/final2.jpg" data-background-size=cover}
+## The end {data-background="Rmd_sup/final.jpg" data-background-size=cover}
 
 ```{r, out.width="100px", fig.align="right"}
 #knitr::include_graphics("../doc/Rmd_sup/breast_cancer_logo.jpg")
